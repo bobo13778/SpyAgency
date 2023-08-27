@@ -1,0 +1,11 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Pade administrateur
+{% endblock %}
+
+{% block body %}
+{% set Admin = Auth %}
+{{parent()}}
+admin
+{% endblock %}

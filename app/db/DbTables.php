@@ -93,7 +93,7 @@ $request=(
     id INT(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
     firstname VARCHAR(250) NOT NULL,
     lastname VARCHAR(250) NOT NULL,
-    email VARCHAR(250) NOT NULL,
+    email VARCHAR(250) NOT NULL UNIQUE,
     password VARCHAR(60) NOT NULL,
     creationDate DATE NOT NULL
     );'

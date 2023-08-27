@@ -1,6 +1,6 @@
 <?php
 
-namespace app\models;
+require_once 'Model.php';
 
 class Hideout extends Model
 {

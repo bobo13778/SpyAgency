@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+
+  Page d'accueil
+
+{% endblock %}
+
+{% block body %}
+{% set Admin = Auth %}
+{{parent()}}
+  <h1>Accueil</h1>
+
+  <h2 class='d-flex'>Liste des missions</h2>
+    {% if missions is empty %}
+      <p>Pas de mission</p>
+    {% else %}
+      {% for mission in missions %}
+        <ul class='list-group'>
+          <li class='list-group-item d-flex justify-content-around'>
+            <p>{{ mission.id }}</p>
+            <p>{{ mission.title }}</p>
+            <p>{{ mission.country }}</p>
+            <p>{{ mission.status }}</p>
+            <a href="./mission?id={{ mission.id }}" class='btn btn-primary'>En savoir plus</a>
+          </li>
+        </ul>
+      {% endfor %}
+    {% endif %}
+
+{% endblock %}

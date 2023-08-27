@@ -1,0 +1,23 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Login Administrateur
+{% endblock %}
+
+{% block body %}
+{% set Admin = Auth %}
+{{parent()}}
+  <div class='container text-center mt-5'>
+    <form class='container col-6 text-center' method='POST' action='./login'>
+      <div class='row mb-3'>
+        <label class='form-label' for='email'>Email</label>
+        <input class='form-control' type='email' name='email' id='email' required/>
+      </div>
+      <div class='mb-3'>
+        <label class='form-label' for='password'>Mot de passe</label>
+        <input class='form-control' type='password' name='password' id='password' required/>
+      </div>
+      <button class='btn btn-primary' type='submit'>Login</button>
+    </form>
+  </div>
+{% endblock %}

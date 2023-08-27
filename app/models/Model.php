@@ -1,8 +1,6 @@
 <?php
 
-namespace app\models;
-
-use app\db\Db;
+require_once '../app/db/Db.php';
 
 class model extends Db
 {
@@ -32,7 +30,7 @@ class model extends Db
   }
 
   //Pour chercher des valeurs dans les tables
-  public function findBy($params)
+  public function findBy(array $params)
   {
     $keys = [];
     $values = [];
@@ -69,7 +67,7 @@ class model extends Db
     $list_keys = implode(', ', $keys);
     $list_inters = implode(', ', $inter);
 
-    return $this->request('INSERT INTO '.$this->table.' ('.$list_keys.') VALUES ('.list_inters.')', $values);
+    return $this->request('INSERT INTO '.$this->table.' ('.$list_keys.') VALUES ('.$list_inters.')', $values);
   }
 
   //Methode UPDATE : modification d'un enregistrement
