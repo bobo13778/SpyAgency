@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Modification
+{% endblock %}
+
+{% block body %}
+{% set Admin = Auth %}
+{{parent()}}
+<h2>Modification</h2>
+  <div class='container text-center mt-5'>
+    <form class='container col-6 text-center' method='POST' action='./update'>
+      {% set submit = true %}
+      {% for field in fields %}
+      {# définition de la valeur actuelle #}
+        {% set placeholder ='' %}
+        {% for key, value in curentValues %}
+          {% if field.formName == key %}
+            {% set placeholder = value %}
+          {% endif %}
+        {% endfor %}
+
+        <div class='row mb-3'>
+          <label class='form-label' for={{field.name}}>{{field.name}}</label>
+          {% if field.values is defined %}
+            {% if field.values == [] %}
+              {% set submit = false %}
+            {% endif %}
+            {# affichage du nom et non de l'id #}
+            {% set placeholderValue ='' %}
+            {% for field in field.values %}
+              {% for key, value in field %}
+                {% if placeholder == value %}
+                  {% set placeholderValue = field.name %}
+                {% endif %}
+              {% endfor %}
+            {% endfor %}
+            <select class='form-control' name={{field.formName}} id='{{field.name}}' {% if field.required %} required {% endif %}/>
+              <option value= '{{placeholder}}'>{{placeholderValue}}</option>
+              {% for value in field.values %}
+                <option value= '{{value.id}}'>{{value.name}}</option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input class='form-control' type={{field.type}} name={{field.formName}} id='{{field.name}}' {% if field.required %} required {% endif %} value='{{placeholder}}'/>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <input type='hidden' name='table' value='{{object}}'/>
+      <input type='hidden' name='itemToModifyId' value='{{ itemToModifyId }}'/>
+   
+      {% if submit == true %}
+        <button type='submit' class='btn btn-success'>Modifier</button>
+      {% endif %}
+    </form>
+  </div>
+
+
+{% endblock %}

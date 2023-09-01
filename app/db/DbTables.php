@@ -28,7 +28,8 @@ $pdoTables->prepare($request)->execute();
 
 $request=(
   'CREATE TABLE IF NOT EXISTS hideouts (
-    code VARCHAR(250) NOT NULL UNIQUE PRIMARY KEY,
+    id int(10) NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    code VARCHAR(250) NOT NULL UNIQUE,
     address TEXT NOT NULL,
     country VARCHAR(250) NOT NULL,
     type VARCHAR(250) NOT NULL
@@ -74,15 +75,16 @@ $request=(
     status VARCHAR(250) NOT NULL,
     startDate DATE NOT NULL,
     endDate DATE NOT NULL,
-    requiredSpecialty VARCHAR(250) NOT NULL,
+    specialtyId INT(10) NOT NULL,
     agentId INT(10) NOT NULL,
-    hideoutCode VARCHAR(250),
+    hideoutId INT(10),
     contactId INT(10) NOT NULL,
     targetId INT(10) NOT NULL,
     FOREIGN KEY (agentId) REFERENCES agents(id),
-    FOREIGN KEY (hideoutCode) REFERENCES hideouts(code),
+    FOREIGN KEY (hideoutId) REFERENCES hideouts(id),
     FOREIGN KEY (contactId) REFERENCES contacts(id),
-    FOREIGN KEY (targetId) REFERENCES targets(id)
+    FOREIGN KEY (targetId) REFERENCES targets(id),
+    FOREIGN KEY (specialtyId) REFERENCES specialties(id)
     );'
 );
 

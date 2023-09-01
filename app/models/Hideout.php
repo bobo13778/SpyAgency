@@ -13,8 +13,40 @@ class Hideout extends Model
     public function __construct()
     {
         $this->table = 'hideouts';
+        $this->fields = [
+                            ['name' =>'Code',
+                            'required' => true,
+                            'type' => 'text',
+                            'formName' => 'code'
+                            ],
+                            ['name' =>'Adresse',
+                            'required' => true,
+                            'type' => 'text',
+                            'formName' => 'address'
+                            ],
+                            ['name' =>'Pays',
+                            'required' => true,
+                            'type' => 'text',
+                            'formName' => 'country'
+                            ],
+                            ['name' =>'Type',
+                            'required' => true,
+                            'type' => 'text',
+                            'formName' => 'type'
+                            ]
+                        ];
     }
 
+    public function getFields(): array
+    {
+        return $this->fields;
+    }
+
+    public function getTable(): string
+    {
+        return $this->table;
+    }
+    
     public function getId(): int
     {
         return $this->id;
@@ -34,6 +66,7 @@ class Hideout extends Model
     {
         return $this->country;
     }
+
     public function getType(): string
     {
         return $this->type;
@@ -43,6 +76,7 @@ class Hideout extends Model
     {
         $this->id = $id;
     }
+
     public function setCode(string $code): void
     {
         $this->code = $code;
@@ -57,6 +91,7 @@ class Hideout extends Model
     {
         $this->country = $country;
     }
+    
     public function setType(string $type): void
     {
         $this->type = $type;

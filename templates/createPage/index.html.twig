@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block title %}
+Création
+{% endblock %}
+
+{% block body %}
+{% set Admin = Auth %}
+{{parent()}}
+<h2>Création</h2>
+  <div class='container text-center mt-5'>
+    <form class='container col-6 text-center' method='POST' action='./create'>
+      {% set submit = true %}
+      {% for field in fields %}
+        <div class='row mb-3'>
+          <label class='form-label' for={{field.name}}>{{field.name}}</label>
+          {% if field.values is defined %}
+            {% if field.values == [] %}
+              {% set submit = false %}
+            {% endif %}
+            <select class='form-control' name={{field.formName}} id='{{field.name}}' {% if field.required %} required {% endif %}/>
+              <option value= ''>Faites votre choix</option>
+              {% for value in field.values %}
+                <option value= '{{value.id}}'>{{value.name}}</option>
+              {% endfor %}
+            </select>
+          {% else %}
+            <input class='form-control' type={{field.type}} name={{field.formName}} id='{{field.name}}' {% if field.required %} required {% endif %}/>
+          {% endif %}
+        </div>
+      {% endfor %}
+      <input type='hidden' name='table' value='{{object}}'/>     
+      {% if submit == true %}
+        <button type='submit' class='btn btn-success'>Créer</button>
+      {% endif %}
+    </form>
+  </div>
+
+
+{% endblock %}

@@ -10,8 +10,25 @@ class Specialty  extends Model
   public function __construct()
   {
       $this->table = 'specialties';
+      $this->fields = [
+                        ['name' =>'Nom',
+                        'required' => true,
+                        'type' => 'text',
+                        'formName' => 'name'
+                        ]
+                      ];
   }
 
+  public function getFields(): array
+  {
+      return $this->fields;
+  }
+
+  public function getTable(): string
+  {
+      return $this->table;
+  }
+  
   public function getId() : int {
     return $this->id;
   }

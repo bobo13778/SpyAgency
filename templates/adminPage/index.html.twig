@@ -1,11 +1,19 @@
 {% extends "base.html.twig" %}
 
 {% block title %}
-Pade administrateur
+Page administrateur
 {% endblock %}
 
 {% block body %}
 {% set Admin = Auth %}
 {{parent()}}
-admin
+
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Administrateurs', 'tables': admins, 'getparam': 'Admin'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Agents', 'tables': agents, 'getparam': 'Agent'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Contacts', 'tables': contacts, 'getparam': 'Contact'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Planques', 'tables': hideouts, 'getparam': 'Hideout'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Missions', 'tables': missions, 'getparam': 'Mission'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Spécialités', 'tables': specialties, 'getparam': 'Specialty'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Cibles', 'tables': targets, 'getparam': 'Target'}%}
+
 {% endblock %}

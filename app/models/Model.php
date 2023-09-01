@@ -5,6 +5,8 @@ require_once '../app/db/Db.php';
 class model extends Db
 {
   protected $table;
+  //$fields servira à lister les champs pour la création/mise à jour des enregistrements
+  protected $fields;
   private $db;
 
   public function request(string $sql, array $attributes = null)
@@ -25,7 +27,7 @@ class model extends Db
   //Pour lire toute une table
   public function findAll()
   {
-    $query = $this->request('SELECT * FROM '.$this->table);
+    $query = $this->request("SELECT * FROM {$this->table}");
     return $query->fetchAll();
   }
 
@@ -58,7 +60,7 @@ class model extends Db
     $values = [];
 
     foreach($model as $key => $value){
-      if($value !== null && $key != 'table'){
+      if($value !== null && $key != 'table' && $key != 'db' && $key != 'fields'){
         $keys[] = $key;
         $inter[] = "?";
         $values[] = $value;
@@ -67,7 +69,7 @@ class model extends Db
     $list_keys = implode(', ', $keys);
     $list_inters = implode(', ', $inter);
 
-    return $this->request('INSERT INTO '.$this->table.' ('.$list_keys.') VALUES ('.$list_inters.')', $values);
+    return $this->request("INSERT INTO {$this->table} ({$list_keys}) VALUES ({$list_inters})", $values);
   }
 
   //Methode UPDATE : modification d'un enregistrement
@@ -77,8 +79,8 @@ class model extends Db
     $values = [];
 
     foreach($model as $key => $value){
-      if($value !== null && $key != 'table'){
-        $keys[] = $key;
+      if($value !== null && $key != 'table' && $key != 'db' && $key != 'fields') {
+        $keys[] = $key.' = ?';
         $values[] = $value;
       }
     }
@@ -87,14 +89,14 @@ class model extends Db
 
     $list_keys = implode(', ', $keys);
 
-    return $this->request('UPDATE '.$this->table.' SET '.$list_keys.' WHERE id = ?', $values);
+    return $this->request("UPDATE {$this->table} SET {$list_keys} WHERE id = ?", $values);
   }
 
   //Methode DELETE : supprimer un enregistrement
   public function delete(int $id){
-    return $this->request("DELETE FROM {$this->table} WHERE id = ?", [$id]);
+    $values[] = $id;
+    return $this->request("DELETE FROM {$this->table} WHERE id = ?", $values);
   }
-
 
   //Hydratation des données
   public function hydrate(array $datas)
