@@ -7,7 +7,7 @@ class Hideout extends Model
     protected int $id;
     protected string $code;
     protected string $address;
-    protected string $country;
+    protected int $countryId;
     protected string $type;
 
     public function __construct()
@@ -27,7 +27,8 @@ class Hideout extends Model
                             ['name' =>'Pays',
                             'required' => true,
                             'type' => 'text',
-                            'formName' => 'country'
+                            'values' => [],
+                            'formName' => 'countryId'
                             ],
                             ['name' =>'Type',
                             'required' => true,
@@ -41,6 +42,12 @@ class Hideout extends Model
     {
         return $this->fields;
     }
+
+    public function setCountries(array $countries): void 
+    {
+        $this->fields[2]['values'] = $countries; 
+    }
+
 
     public function getTable(): string
     {
@@ -62,9 +69,9 @@ class Hideout extends Model
         return $this->address;
     }
 
-    public function getCountry(): string
+    public function getCountryId(): int
     {
-        return $this->country;
+        return $this->countryId;
     }
 
     public function getType(): string
@@ -87,9 +94,9 @@ class Hideout extends Model
         $this->address = $address;
     }
 
-    public function setCountry(string $country): void
+    public function setCountryId(int $countryId): void
     {
-        $this->country = $country;
+        $this->countryId = $countryId;
     }
     
     public function setType(string $type): void

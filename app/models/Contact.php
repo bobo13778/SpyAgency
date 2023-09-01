@@ -9,7 +9,7 @@ class Contact extends Model
     protected string $lastname;
     protected string $dateOfBirth;
     protected string $codeName;
-    protected string $nationality;
+    protected int $countryId;
 
     public function __construct()
     {
@@ -38,7 +38,8 @@ class Contact extends Model
                             ['name' =>'Nationalité',
                             'required' => true,
                             'type' => 'text',
-                            'formName' => 'nationality'
+                            'values' => [],
+                            'formName' => 'countryId'
                             ]
                         ];
     }
@@ -46,6 +47,11 @@ class Contact extends Model
     public function getFields(): array
     {
         return $this->fields;
+    }
+    
+    public function setCountries(array $countries): void 
+    {
+        $this->fields[4]['values'] = $countries; 
     }
 
     public function getTable(): string
@@ -78,9 +84,9 @@ class Contact extends Model
         return $this->codeName;
     }
 
-    public function getNationality(): string
+    public function getcountryId(): int
     {
-        return $this->nationality;
+        return $this->countryId;
     }
 
     public function setId(int $id): void
@@ -108,9 +114,9 @@ class Contact extends Model
         $this->codeName = $codeName;
     }
     
-    public function setNationality(string $nationality): void
+    public function setcountryId(int $countryId): void
     {
-        $this->nationality = $nationality;
+        $this->countryId = $countryId;
     }
 
 

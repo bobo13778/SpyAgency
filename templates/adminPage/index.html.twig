@@ -15,5 +15,8 @@ Page administrateur
 {%include'./adminPage/tables.html.twig' with {'tablename': 'Missions', 'tables': missions, 'getparam': 'Mission'}%}
 {%include'./adminPage/tables.html.twig' with {'tablename': 'Spécialités', 'tables': specialties, 'getparam': 'Specialty'}%}
 {%include'./adminPage/tables.html.twig' with {'tablename': 'Cibles', 'tables': targets, 'getparam': 'Target'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Pays', 'tables': countries, 'getparam': 'Country'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Types', 'tables': types, 'getparam': 'Type'}%}
+{%include'./adminPage/tables.html.twig' with {'tablename': 'Status', 'tables': statusList, 'getparam': 'Status'}%}
 
 {% endblock %}

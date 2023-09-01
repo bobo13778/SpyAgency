@@ -80,7 +80,7 @@ class model extends Db
 
     foreach($model as $key => $value){
       if($value !== null && $key != 'table' && $key != 'db' && $key != 'fields') {
-        $keys[] = $key.' = ?';
+        $keys[] ="$key = ?";
         $values[] = $value;
       }
     }

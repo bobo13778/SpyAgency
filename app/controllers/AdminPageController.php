@@ -8,6 +8,9 @@ require_once '../app/models/Hideout.php';
 require_once '../app/models/Mission.php';
 require_once '../app/models/Specialty.php';
 require_once '../app/models/Target.php';
+require_once '../app/models/Country.php';
+require_once '../app/models/Type.php';
+require_once '../app/models/Status.php';
 
 class AdminPageController extends Controller
 {
@@ -28,6 +31,12 @@ class AdminPageController extends Controller
       $specialties = $specialties->findAll();
       $targets = new Target();
       $targets = $targets->findAll();
+      $countries = new Country();
+      $countries = $countries->findAll();
+      $types = new Type();
+      $types = $types->findAll();
+      $statusList = new Status();
+      $statusList = $statusList->findAll();
       $this->twig->display('/adminPage/index.html.twig', [
         'Auth' => $_SESSION['Auth'], 
         'admins' => $admins, 
@@ -36,7 +45,10 @@ class AdminPageController extends Controller
         'hideouts' => $hideouts, 
         'missions' => $missions, 
         'specialties' => $specialties, 
-        'targets' => $targets
+        'targets' => $targets,
+        'countries' => $countries,
+        'types' => $types,
+        'statusList' => $statusList
       ]);
     } else {
       $this->twig->display('/home/index.html.twig', ['Auth' => $_SESSION['Auth']]);

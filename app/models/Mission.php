@@ -8,9 +8,9 @@ class Mission extends Model
     protected string $title;
     protected string $description;
     protected string $codeName;
-    protected string $country;
-    protected string $type;
-    protected string $status;
+    protected int $countryId;
+    protected int $typeId;
+    protected int $statusId;
     protected string $startDate;
     protected string $endDate;
     protected int $specialtyId;
@@ -41,17 +41,20 @@ class Mission extends Model
                             ['name' =>'Pays',
                             'required' => true,
                             'type' => 'text',
-                            'formName' => 'country'
+                            'values' => [],
+                            'formName' => 'countryId'
                             ],
                             ['name' =>'Type',
                             'required' => true,
                             'type' => 'text',
-                            'formName' => 'type'
+                            'values' => [],
+                            'formName' => 'typeId'
                             ],
                             ['name' =>'Status',
                             'required' => true,
                             'type' => 'text',
-                            'formName' => 'status'
+                            'values' => [],
+                            'formName' => 'statusId'
                             ],            
                             ['name' =>'Date de début',
                             'required' => true,
@@ -99,6 +102,21 @@ class Mission extends Model
     public function getFields(): array
     {
         return $this->fields;
+    }
+
+    public function setCountries(array $countries): void 
+    {
+        $this->fields[3]['values'] = $countries; 
+    }
+
+    public function setTypes(array $types): void 
+    {
+        $this->fields[4]['values'] = $types; 
+    }
+
+    public function setStatusList(array $status): void 
+    {
+        $this->fields[5]['values'] = $status; 
     }
 
     public function setSpecialties(array $specialties): void 
@@ -151,19 +169,19 @@ class Mission extends Model
         return $this->codeName;
     }
 
-    public function getCountry(): string
+    public function getCountryId(): int
     {
-        return $this->country;
+        return $this->countryId;
     }
 
-    public function getType(): string
+    public function getTypeId(): int
     {
-        return $this->type;
+        return $this->typeId;
     }
 
-    public function getStatus(): string
+    public function getStatus(): int
     {
-        return $this->status;
+        return $this->statusId;
     }
 
     public function getStartDate(): string
@@ -221,19 +239,19 @@ class Mission extends Model
         $this->codeName = $codeName;
     }
 
-    public function setCountry(string $country): void
+    public function setCountryId(int $countryId): void
     {
-        $this->country = $country;
+        $this->countryId = $countryId;
     }
 
-    public function setType(string $type): void
+    public function setTypeId(int $typeId): void
     {
-        $this->type = $type;
+        $this->typeId = $typeId;
     }
 
-    public function setStatus(string $status): void
+    public function setStatusId(int $statusId): void
     {
-        $this->status = $status;
+        $this->statusId = $statusId;
     }
 
     public function setStartDate(string $startDate): void

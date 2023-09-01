@@ -9,7 +9,7 @@ class Agent extends Model
     protected string $lastname;
     protected string $dateOfBirth;
     protected string $idCode;
-    protected string $nationality;
+    protected int $countryId;
     protected int $specialtyId;
 
     public function __construct()
@@ -39,10 +39,11 @@ class Agent extends Model
                             ['name' =>'Nationalité',
                             'required' => true,
                             'type' => 'text',
-                            'formName' => 'nationality'
+                            'values' => [],
+                            'formName' => 'countryId'
                             ],
                             ['name' =>'Spécialité',
-                            'required' => false,
+                            'required' => true,
                             'type' => null,
                             'values' => [],
                             'formName' => 'specialtyId'
@@ -58,6 +59,11 @@ class Agent extends Model
     public function setSpecialties(array $specialties): void 
     {
         $this->fields[5]['values'] = $specialties; 
+    }
+
+    public function setCountries(array $countries): void 
+    {
+        $this->fields[4]['values'] = $countries; 
     }
 
     public function getTable(): string
@@ -90,9 +96,9 @@ class Agent extends Model
         return $this->idCode;
     }
 
-    public function getNationality(): string
+    public function getcountryId(): int
     {
-        return $this->nationality;
+        return $this->countryId;
     }
 
     public function getSpecialtyId(): int
@@ -125,9 +131,9 @@ class Agent extends Model
         $this->idCode = $idCode;
     }
 
-    public function setNationality(string $nationality): void
+    public function setcountryId(int $countryId): void
     {
-        $this->nationality = $nationality;
+        $this->countryId = $countryId;
     }
     
     public function setSpecialtyId(int $specialtyId): void
