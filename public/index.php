@@ -1,6 +1,9 @@
 <?php
 
 session_start();
+if(!isset($_SESSION['Auth'])){
+  $_SESSION['Auth'] = '';
+}
 define('BASE_URL', '/PHP/SpyAgency/public');
 
 require_once '../vendor/autoload.php';
