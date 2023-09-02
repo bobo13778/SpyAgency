@@ -79,8 +79,8 @@ class DeleteController extends Controller
             }
           }
         }
-        //Status et type
-        if ($_GET['table'] === 'Status' || $_GET['table'] === 'Type') {
+        //Status, type,contact, cible, agent et planque
+        if ($_GET['table'] === 'Status' || $_GET['table'] === 'Type' || $_GET['table'] === 'Agent' || $_GET['table'] === 'Contact' || $_GET['table'] === 'Target' || $_GET['table'] === 'Hideout') {
             foreach($missionToCheck as $mission) {
                 if($mission[strtolower($_GET['table']).'Id'] === (int)$_GET['recordId']) {
                     echo '<script>alert(\'Cet enregistrement est utilisée par une mission, vous ne pouvez pas le supprimer\'); window.location =\'./adminpage\';</script>';
