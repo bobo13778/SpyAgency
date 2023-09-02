@@ -4,7 +4,7 @@ session_start();
 if(!isset($_SESSION['Auth'])){
   $_SESSION['Auth'] = '';
 }
-define('BASE_URL', '/PHP/SpyAgency/public');
+define('BASE_URL', 'https://spyagency.go.yj.fr/');
 
 require_once '../vendor/autoload.php';
 require_once '../app/router/Router.php';
