@@ -4,7 +4,6 @@ session_start();
 if(!isset($_SESSION['Auth'])){
   $_SESSION['Auth'] = '';
 }
-define('BASE_URL', 'https://spyagency.go.yj.fr/');
 
 require_once '../vendor/autoload.php';
 require_once '../app/router/Router.php';
@@ -19,17 +18,17 @@ require_once '../app/controllers/UpdatePageController.php';
 
 $router = new Router();
 
-$router->addRoute('GET', BASE_URL.'/', 'HomeController', 'index');
-$router->addRoute('GET', BASE_URL.'/mission', 'MissionPageController', 'index');
-$router->addRoute('GET', BASE_URL.'/login', 'LoginPageController', 'index');
-$router->addRoute('POST', BASE_URL.'/login', 'LoginPageController', 'index');
-$router->addRoute('GET', BASE_URL.'/adminpage', 'AdminPageController', 'index');
-$router->addRoute('GET', BASE_URL.'/logout', 'LogoutController', 'index');
-$router->addRoute('GET', BASE_URL.'/create', 'CreatePageController', 'index');
-$router->addRoute('POST', BASE_URL.'/create', 'CreatePageController', 'index');
-$router->addRoute('GET', BASE_URL.'/update', 'UpdatePageController', 'index');
-$router->addRoute('POST', BASE_URL.'/update', 'UpdatePageController', 'index');
-$router->addRoute('GET', BASE_URL.'/delete', 'DeleteController', 'index');
+$router->addRoute('GET', '/', 'HomeController', 'index');
+$router->addRoute('GET', '/mission', 'MissionPageController', 'index');
+$router->addRoute('GET', '/login', 'LoginPageController', 'index');
+$router->addRoute('POST', '/login', 'LoginPageController', 'index');
+$router->addRoute('GET', '/adminpage', 'AdminPageController', 'index');
+$router->addRoute('GET', '/logout', 'LogoutController', 'index');
+$router->addRoute('GET', '/create', 'CreatePageController', 'index');
+$router->addRoute('POST', '/create', 'CreatePageController', 'index');
+$router->addRoute('GET', '/update', 'UpdatePageController', 'index');
+$router->addRoute('POST', '/update', 'UpdatePageController', 'index');
+$router->addRoute('GET', '/delete', 'DeleteController', 'index');
 
 $method = $_SERVER['REQUEST_METHOD'];
 $uri = $_SERVER['REQUEST_URI'];

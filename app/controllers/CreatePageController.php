@@ -135,17 +135,17 @@ class CreatePageController extends Controller
           $contactToTest = new Contact();
           $contactToTest = $contactToTest->find($_POST['contactId']);
 
-          if($targetToTest['countryId'] === $agentToTest['countryId']) {
+          if((int)$targetToTest['countryId'] === $agentToTest['countryId']) {
             echo 'L\'agent ne peut pas être de la même nationalité que la cible </br>';
             $testCheck = false;
           }
 
-          if($contactToTest['countryId'] !== (int)$_POST['countryId']) {
+          if((int)$contactToTest['countryId'] !== (int)$_POST['countryId']) {
             echo 'Le contact doit être de la même nationalité que le pays de la mission </br>';
             $testCheck = false;
           }
 
-          if($agentToTest['specialtyId'] !== (int)$_POST['specialtyId']) {
+          if((int)$agentToTest['specialtyId'] !== (int)$_POST['specialtyId']) {
             echo 'L\'agent doit disposer de la spécialité requise pour la mission </br>';
             $testCheck = false;
           }
@@ -154,7 +154,7 @@ class CreatePageController extends Controller
             $hideoutToTest = new Hideout();
             $hideoutToTest = $hideoutToTest->find($_POST['hideoutId']);
 
-            if($hideoutToTest['countryId'] !== (int)$_POST['countryId']) {
+            if((int)$hideoutToTest['countryId'] !== (int)$_POST['countryId']) {
               echo 'La planque doit être dans le même pays que la mission </br>';
               $testCheck = false;
             }

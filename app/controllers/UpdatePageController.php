@@ -127,21 +127,61 @@ class UpdatePageController extends Controller
 
         $this->twig->display('/updatePage/index.html.twig', ['Auth' => $_SESSION['Auth'], 'itemToModifyId' => $_GET['recordId'], 'curentValues' => $curentValues, 'fields' =>$itemToModify->getFields(), 'object' => get_class($itemToModify)]);
       } elseif(isset($_POST) && !empty($_POST)) {
-        //traitement de la demande
-        $table = $_POST['table'];
-        $itemToModifyId = $_POST['itemToModifyId'];
-        $itemToRegister = new $table();
-        $datasToHydrate = [];
-        foreach($_POST as $key=>$value) {
-          if ($key != 'table' && $key != 'itemToModifyId') {
-            $datasToHydrate[$key] = $value; 
+
+         //test métiers
+         $testCheck = true;
+         if($_POST['table'] === 'Mission') {
+           $targetToTest = new Target();
+           $targetToTest = $targetToTest->find($_POST['targetId']);
+           $agentToTest = new Agent();
+           $agentToTest = $agentToTest->find($_POST['agentId']);
+           $contactToTest = new Contact();
+           $contactToTest = $contactToTest->find($_POST['contactId']);
+ 
+           if((int)$targetToTest['countryId'] === $agentToTest['countryId']) {
+             echo 'L\'agent ne peut pas être de la même nationalité que la cible </br>';
+             $testCheck = false;
+           }
+ 
+           if((int)$contactToTest['countryId'] !== (int)$_POST['countryId']) {
+             echo 'Le contact doit être de la même nationalité que le pays de la mission </br>';
+             $testCheck = false;
+           }
+ 
+           if((int)$agentToTest['specialtyId'] !== (int)$_POST['specialtyId']) {
+             echo 'L\'agent doit disposer de la spécialité requise pour la mission </br>';
+             $testCheck = false;
+           }
+ 
+           if(isset($_POST['hideoutId']) && $_POST['hideoutId'] !== null) {
+             $hideoutToTest = new Hideout();
+             $hideoutToTest = $hideoutToTest->find($_POST['hideoutId']);
+ 
+             if((int)$hideoutToTest['countryId'] !== (int)$_POST['countryId']) {
+               echo 'La planque doit être dans le même pays que la mission </br>';
+               $testCheck = false;
+             }
+           }
+           
+         }
+         
+         //traitement de la demande
+         if ($testCheck) {
+          //traitement de la demande
+          $table = $_POST['table'];
+          $itemToModifyId = $_POST['itemToModifyId'];
+          $itemToRegister = new $table();
+          $datasToHydrate = [];
+          foreach($_POST as $key=>$value) {
+            if ($key != 'table' && $key != 'itemToModifyId') {
+              $datasToHydrate[$key] = $value; 
+            }
           }
-        }
-        $itemToRegister->hydrate($datasToHydrate);
-        $itemToRegister->update($itemToModifyId, $itemToRegister);
-        header('Location: ./adminpage');
-      } 
-   
+          $itemToRegister->hydrate($datasToHydrate);
+          $itemToRegister->update($itemToModifyId, $itemToRegister);
+          header('Location: ./adminpage');
+        } 
+      }
     } else {
       $this->twig->display('/home/index.html.twig', ['Auth' => $_SESSION['Auth']]);
     }

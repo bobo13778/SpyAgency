@@ -4,9 +4,9 @@ class Db extends PDO
 {
   private static $instance;
   private const DBHOST = 'localhost';
-  private const DBUSER = 'pierrecalves';
+  private const DBUSER = 'dkmnwvar_pierrecalves';
   private const DBPASS = '9C9tqRnJSfyuQFG';
-  private const DBNAME = 'dkmnwvarspyAgencydb';
+  private const DBNAME = 'dkmnwvar_spyagencydb';
 
   private function __construct()
   {
